@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="">
+	<title>inicio</title>
+	<link rel="stylesheet" href="static/stilos.css">
 </head>
 <body>
-	{% block container %}
 	<form method="POST">{% csrf_token %}
 		{{form.as_p}}
 		<input type="submit" value="registrarse">
 	</form>
-	{% endblock %}
 </body>
 </html>
 

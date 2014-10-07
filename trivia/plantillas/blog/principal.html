@@ -1,12 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="">
+	<title>inicio</title>
+	<link rel="stylesheet" type="text/css" href="/static/stilos.css">
 </head>
 <body>
-	<h1>este es mi numero</h1>
+	<header>
+		logo
+	</header>
+	<nav>
+		<div class="contenedor" id="uno">
+			<img src="">
+		</div>
+		<div class="contenedor" id="dos">
+			<img src="">
+		</div>
+		<div class="contenedor" id="tres">
+			<img src="">
+		</div>
+		<div class="contenedor" id="cuatro">
+			<img src="">
+		</div>
+		<div class="contenedor" id="cinco">
+			<img src="">
+		</div>
+		<div class="contenedor" id="seis">
+			<img src="">
+		</div>
+	</nav>
+	<article>
+		<section>
+
+		</section>
+	</article>
+	<aside>				
+	</aside>
+	<footer></footer>
+	<form method="POST">{% csrf_token %}
+				{{form.as_p}}
+				<input type="submit" value="Enviar">
+			</form>
 </body>
 </html>
