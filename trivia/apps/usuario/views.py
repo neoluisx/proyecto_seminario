@@ -26,7 +26,7 @@ def login_usuario(request):
 
 def Registro_Usuario(request):
 	if request.method=="POST":
-		form = UserCreationForm(request.POST)
+		form = UserCreationForm(method.POST)
 		if(form.is_valid()):
 			form.save()
 			return HttpResponseRedirect("http://localhost:8000/")

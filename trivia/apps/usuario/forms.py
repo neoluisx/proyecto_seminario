@@ -3,5 +3,5 @@ from django.forms import ModelForm
 from .models import *
 
 class PerfilForm(ModelForm):
-	pass
+	email=models.EmailField()
 	
