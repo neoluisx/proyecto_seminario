@@ -20,7 +20,7 @@ def login_usuario(request):
 			if resultado:
 				login(request,resultado)
 				request.session["name"]=username
-				return HttpResponseRedirect("/usuario/registro/")
+				return HttpResponseRedirect("/registro/")
 	form=AuthenticationForm()
 	return render_to_response("blog/principal.html",{"form":form},RequestContext(request))
 
@@ -29,6 +29,6 @@ def Registro_Usuario(request):
 		form = UserCreationForm(request.POST)
 		if(form.is_valid()):
 			form.save()
-			return HttpResponseRedirect("blog/principal")
+			return HttpResponseRedirect("http://localhost:8000/")
 	form=UserCreationForm()
 	return render_to_response("usuario/registro.html",{"form":form},RequestContext(request))
