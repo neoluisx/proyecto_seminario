@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+	    <title>Registro usuario</title>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+			<h2>Bienvenido {{ user.get_username }}</h2>
+			<!<img src="/media/{{ user.perfil.avatar}}" alt="avatar">
+			<!<img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar">
+			<!<img src="/media/{{ user.perfil.avatar.url_200x200}}" alt="avatar">
+			</div>
+		</div>
+	</div>
+{% endblock %}

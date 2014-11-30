@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
+    'captcha',
     'trivia.apps.usuario',
 )
 
@@ -63,7 +65,17 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'trivia',
+        'HOST':'localhost',
+        'PORT':'3306',
+        'USER':'root'
+    }
+}
+"""
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -85,3 +97,6 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS=(os.path.join(RUTA_PROYECTO,"plantillas"),)
 STATICFILES_DIRS=(os.path.join(RUTA_PROYECTO,"static"),)
 MEDIA_ROOT=os.path.join(RUTA_PROYECTO,"media")
+
+RECAPTCHA_PUBLIC_KEY = '76wtgdfsjhsydt7r5FFGFhgsdfytd656sad75fgh'
+RECAPTCHA_PRIVATE_KEY = '98dfg6df7g56df6gdfgdfg65JHJH656565GFGFGs'
