@@ -1,192 +1,107 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+  Prologue by HTML5 UP
+  html5up.net | @n33co
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {% block title %}
-    {% endblock %}
-
-    <!-- Bootstrap -->
-    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/style.css">
-    <script src="static/js/jquery-2.1.0.min.js"></script>
-       <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '387105771444100',
-      xfbml      : true,
-      version    : 'v2.2'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.scrolly.min.js"></script>
+    <script src="/static/js/jquery.scrollzer.min.js"></script>
+    <script src="/static/js/skel.min.js"></script>
+    <script src="/static/js/skel-layers.min.js"></script>
+    <script src="/static/js/init.js"></script>
+    <!--<noscript>-->
+      <link rel="stylesheet" href="/static/css/skel.css" />
+      <link rel="stylesheet" href="/static/css/style.css" />
+      <link rel="stylesheet" href="/static/css/style-wide.css" />
+    <!--</noscript>
+    <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
   </head>
-  <body background="/media/fondo.jpg" heigth="100%" width="100%">
-    <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&appId=387105771444100&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-    <script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
+  <body>
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-      return render_to_response("usuario/login.html",{'formulario':formulario},context_instance=RequestContext(request))
-    });
-  }
+    <!-- Header -->
+      <div id="header" class="skel-layers-fixed">
 
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '{your-app-id}',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.1' // use version 2.1
-  });
+        <div class="top">
 
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
+          <!-- Logo -->
+            <div id="logo">
+              {% if user.is_authenticated %}
+              <span class="image avatar48"><img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar"></span>
+              <h1 id="title">{{ user.get_username }}</h1>
+              <li class="active"><a href="/logout/">Salir</a></li>
+              <p>Hyperspace Engineer</p>
+                        {% endif %}
+            </div>
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
-</script>
-    <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '387105771444100',
-      xfbml      : true,
-      version    : 'v2.2'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-    <nav class="navbar navbar-inverse" role="navigation">
-      <div class="container">
-        <!--<div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed",data-toggle="collapse",data-target="#navbar",aria-expanded="false",aria-controls="navbar"></button>
-            <span class="sr-only"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <div class="container">-->
-              <div class="row">
-                <div id="navbar" class="col-xs-6"><img src="/media/triviador-logo.png" heigth="59"></div>
-                <div id="navbar" class="col-xs-6">
-                  <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Inicio</a></li>
-                    {% if user.is_authenticated %}
-                      <li class="active"><a href="/">Crear Partida</a></li>
-                      <li class="active"><a href="/">Unirse a una partida</a></li>
-                      <li class="active">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_username }}<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar"></li>
-                          <li class="active"><a href="/logout/">Salir</a></li>
-                        </ul>
-                      </li>
-                      <li><img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar" class="img-circle"></li>
-                     <!--<li><img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar"></li>-->
-                    {% else %}
-                      <li class="active"><a href="/registro.html">Registro</a></li>
-                      <li class="active"><a href="login.html">Login</a></li>
-                    {% endif %}
-                  </ul>
-               <!</div>
-              <!</div>
-            </div>     
-      </div>  
-      </div>
-    </nav>
-    <article>
-      <aside>
-        <div>
-          {% block content %}
-          {% endblock %}
+          <!-- Nav -->
+            <nav id="nav">
+              <ul>
+                <li><a href="/" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Inicio</span></a></li>
+                <li><a href="login.html" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-user">Login</span></a></li>
+                <li><a href="registro.html" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">Registro</span></a></li>
+                <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>
+              </ul>
+            </nav>
+            
         </div>
-      </aside>
-    </article>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{{STATIC_URL}}js/jquery-2.1.0.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+        
+        <div class="bottom">
+
+          <!-- Social Icons -->
+            <ul class="icons">
+              <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+              <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+              <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+              <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+              <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+        
+        </div>
+      
+      </div>
+
+    <!-- Main -->
+      <div id="main">
+
+        <!-- Intro -->
+          <section id="top" class="one dark cover">
+            <div class="container">
+
+              <header>
+                {% block content %}
+                      {% endblock %}
+              </header>
+              
+              <footer>
+                
+              </footer>
+
+            </div>
+          </section>
+        <!-- About Me -->
+          
+      
+        
+      </div>
+
+    <!-- Footer -->
+      <div id="footer">
+        
+        <!-- Copyright -->
+          <ul class="copyright">
+            <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+          </ul>
+        
+      </div>
+
   </body>
-  
 </html>
