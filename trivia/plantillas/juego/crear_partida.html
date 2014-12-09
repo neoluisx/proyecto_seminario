@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>CREAR PARTIDA</h2>
+<div class="col-xs-4"></div>
+<div class="col-xs-5">
+	<form id="sala">
+		<ul>
+			<li><label>nombre de la partida</label><input type="text" name="nombre"/></li>
+			<li><label>cantidad de jugadores</label><input type="text" name="cantidad"/></li>
+			<li><label>cantidad de preguntas</label><input type="text" name="pregunta"/>
+			<input type="submit" value="crear"/></li>
+		</ul>
+	</form>
+</div>
+{% endblock %}

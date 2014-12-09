@@ -3,30 +3,24 @@
 	<title>REGISTRO</title>
 {% endblock %}
 {% block content %}
-	<div >
+	<div>
 		<div class="row">
-			<div class="col-xs-5"></div>
-			<div class="col-xs-3">
-				{% load bootstrap3 %}
-			    <form action="" method="post" class="form">
-			    	<legend><H3>Formulario de Registro</H3></legend>
-			        {% csrf_token %}
-			        {% bootstrap_form formulario %}
-			        
-			    </form>
-			    <div>{% buttons %}
-			            <button type="submit" class="button scrolly">REGISTRARSE</button>
-			        {% endbuttons %}</div>
-				
+			<div class="col-xs-3"></div>
+			<div id="fq">
+				<div class="col-xs-9">
+				    <form action="" method="post" class="form">
+				    	<legend><H3>Formulario de Registro</H3></legend>
+				        {% csrf_token %}
+				        {{ formularior.as_ul }}        
+				    	<div>
+				       		<button type="submit" class="button scrolly">REGISTRARSE</button>
+				    	</div>
+					</form>
+				</div>
+			</div>
 			</div>
 		</div>
 	</div>
-	<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
 {% endblock %}
 
 

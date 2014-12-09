@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include("trivia.apps.usuario.urls")),
+    url(r'^', include("trivia.apps.preguntas.urls")),
     url(r'^media/(?P<path>.*)$','django.views.static.serve',
     {'document_root':settings.MEDIA_ROOT,}
     ),

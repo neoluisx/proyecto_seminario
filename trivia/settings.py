@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'captcha',
     'trivia.apps.usuario',
+    'trivia.apps.preguntas',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,13 +60,13 @@ WSGI_APPLICATION = 'trivia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-"""
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.sqlite3',
+   #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+   # }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -75,7 +76,7 @@ DATABASES = {
         'USER':'root'
     }
 }
-"""
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
