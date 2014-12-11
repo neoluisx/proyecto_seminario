@@ -20,4 +20,9 @@ class frespuestaI(ModelForm):
 	class Meta:
 		model=Respuesta_Inco
 		exclude=['pregunta']
-
+class PermisoForm(ModelForm):
+	class Meta:
+		model=permiso
+class PermisosgeFoms(ModelForm):
+	class Meta:
+		model=permisogeneral

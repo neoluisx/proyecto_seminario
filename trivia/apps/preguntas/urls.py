@@ -11,7 +11,9 @@ urlpatterns = patterns('',
     url(r'^partida/$', crear_partida),
     url(r'^espera/$', sala_espera),
     url(r'^salas/$', ver_salas),
-    url(r'^permisos/$', mispermisos),
+    url(r'^permisos/$', permiso),
     url(r'^permisos/agregar$', agregar_permiso),
+    #url(r'^permisoos/$',permisos),
+    url(r'^permisosg/$',permisogeneral),
 
 )

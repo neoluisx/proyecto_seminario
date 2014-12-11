@@ -1,0 +1,16 @@
+{%extends "base.html"%}
+{% block content %}
+<div class="row">
+			<div class="col-xs-3"></div>
+			<div class="col-xs-10" id="par">
+			<h1>Dar permisos permiso</h1>
+			<form action="" method="post" accept-charset="utf-8">
+				{%csrf_token%}
+				{{form_permg.as_p}}
+				<input type = "submit"  value="Dar Permiso" >
+				<p>Si no existe permisos tiene que:  <a href="/permisos/">Agregar</a></p>
+			</form>	
+			</div>
+		</div>
+{%endblock%}
+

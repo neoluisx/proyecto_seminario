@@ -117,25 +117,59 @@ def agregar_permiso(request):
 	usuario.permissions.add(per);
 	return HttpResponse("/permisos/editar/")
 
-def  permisos(request):
+def  mispermisos(request):
 	listapermisos=[]
 	if request.user.has_perm("usuario.add_tema"):
 		listapermisos.append({"url":"/tema/","label":"Registro Temas"})
 	if request.user.has_perm("usuario.bloques_permisos"):
 		listapermisos.append({"url":"/permisos/","label":"Permisos"})
 	return listapermisos
-def mispermisos(request):
-	menu=permisos(request)
+def permiso(request):
 	usuario=request.user
 	if not usuario.has_perm("usuario.add_tema"):
-		estadoo=True
+		estado=True
 		mensaje="Error no puede acceder a este sitio no tiene permisos"
-		datos={"estadoo":estadoo, "mensaje":mensaje,"menu":menu}
+		datos={"estadoo":estado, "mensaje":mensaje}
 		return render_to_response("usuario/permisos.html",datos, RequestContext(request))
-	usuario=User.objects.all()
-	listageneral=[]
-	listageneral.append({"id":"usuario.add_tema"})
-	listageneral.append({"id":"usuario.bloques_permisos"})
-	#pdb.set_trace()
-
-	return render_to_response("usuario/permisos.html", {"usuario":usuario,"menu":menu,"lista":listageneral}, RequestContext(request))
+	if request.user.is_authenticated():
+		if request.method=="POST":
+			form_perm=PermisoForm(request.POST)
+			if form_perm.is_valid():
+				form_perm.save()
+			estadoo=True
+			mensaje="se a registrado permiso con exito"
+			dato={"form_perm":form_perm, "mensaje":mensaje, "estadoo":estadoo}
+			return render_to_response("usuario/permisos.html",dato,RequestContext(request))	
+		else:
+			form_perm=PermisoForm()
+		return render_to_response("usuario/permisos.html",{"form_perm":form_perm},RequestContext(request))
+	return HttpResponseRedirect("/login/")
+def permisogeneral(request):
+	usuario=request.user
+	if not usuario.has_perm("usuario.add_tema"):
+		estado=True
+		mensaje="Error no puede acceder a este sitio no tiene permisos"
+		datos={"estadoo":estado, "mensaje":mensaje}
+		return render_to_response("usuario/permisogenerales.html",datos, RequestContext(request))
+	if request.user.is_authenticated():
+		if request.method=="POST":
+			form_permg=PermisosgeFoms(request.POST)
+			if form_permg.is_valid():
+				nombre=form_permg.save(commit=False)
+				nombre.save()
+				name=nombre.user
+				if(nombre.permiso.nombre=="add_tema"):
+					i=22
+				else:
+					if(nombre.permiso.nombre=="add_pregunta"):
+						i=25
+				name.user_permissions.add(i)
+				estadoo=True
+				mensaje="se a registrado permiso con exito"
+				dato={"form_permg":form_permg, "mensaje":mensaje, "estadoo":estadoo}
+				return render_to_response("usuario/permisogenerales.html",dato,RequestContext(request))
+				
+		else:
+			form_permg=PermisosgeFoms()
+		return render_to_response("usuario/permisogenerales.html",{"form_permg":form_permg},RequestContext(request))
+	return HttpResponseRedirect("/login/")

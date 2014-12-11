@@ -843,3 +843,13 @@
 	display:block;
 	border: 3px solid white;
 }
+#tab{
+	color: black;
+	text-align: left;
+}
+#per{
+	text-align: right;
+}
+#perm{
+	text-align: right;
+}

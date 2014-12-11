@@ -116,3 +116,4 @@ def Pagina_Principal(request):
 	return render_to_response("blog/Principal.html",{},RequestContext(request))
 def consultas(request):
 	return render_to_response("blog/contacto.html",{},RequestContext(request))
+

@@ -14,6 +14,5 @@ urlpatterns = patterns('',
     url(r'^perfil/$',perfil_view),
     url(r'^active/$',user_active_view),
     url(r'^user/modificar/$',modificar_perfil),
-    url(r'^accounts/',include ('django.contrib.auth.urls')),
     #url(r',^media/(?<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT,}),
   )
