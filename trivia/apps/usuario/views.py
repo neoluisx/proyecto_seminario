@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import *
+from trivia.apps.preguntas.views import *
 
 from .models import *
 from django.contrib.auth.forms import AuthenticationForm
@@ -18,7 +19,8 @@ def registro_view(request):
 			usuario.is_active=False
 			usuario.save()
 			perfil=Perfil.objects.create(user=usuario)
-			return HttpResponse("registro con exito")
+			mensaje="el registro fue con exito"
+			return HttpResponse("se hizo el registro con exito")
 	else:
 		formulario_registro=fusuario()
 	return render_to_response("usuario/registro.html",{'formularior':formulario_registro},context_instance=RequestContext(request))
@@ -96,7 +98,13 @@ def modificar_perfil(request):
 		if request.method=='POST':
 			formulario=fperfil_modificar(request.POST,request.FILES,instance=perfil)
 			if formulario.is_valid():
+				contrasena=request.POST['contra']
 				formulario.save()
+				usuario.set_password(contrasena)
+				usuario.save()
+				#acceso=authenticate(username=request.user,password=contrasena)
+				# if acceso is not None:
+				# 	login(request, acceso)
 				return render_to_response("blog/Principal.html",{},RequestContext(request))
 		else:
 			formulario=fperfil_modificar(instance=perfil)

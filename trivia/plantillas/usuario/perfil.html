@@ -7,21 +7,22 @@
 {% block content %}
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12">
-			<h2>NOMBRE: {{ user.get_username }}</h2>
-			<img src="/media/{{ user.perfil.avatar}}" alt="avatar">
-			<h2>CORREO: {{user.email}}</h2>
-			<!<img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar">
-			<!<img src="/media/{{ user.perfil.avatar.url_200x200}}" alt="avatar">
-			<a href="/user/modificar/">Modificar</a>
+			<div class="col-xs-2"></div>
+				<div >
+					
+					<div id="ty">
+						<h3>PERFIL</h3>
+					<img src="/media/{{ user.perfil.avatar.url_200x200}}" alt="avatar">
+					<div>
+					<h6>NOMBRE: {{ user.get_username }}</h6>
+					<h6>CORREO: {{user.email}}</h6>
+					<!<img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar">
+					<!<img src="/media/{{ user.perfil.avatar.url_200x200}}" alt="avatar">
+					<a href="/user/modificar/">Modificar</a>
+					</div>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="col-xs-11">
-			<div id="pagina"></div>
-			<div id="controles">
-
-				<input id="mensaje" type="text" placeholder=""/>
-		</div>
 		</div>
 		
 	</div>

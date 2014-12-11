@@ -14,7 +14,7 @@ class fperfil(ModelForm):
 		model=Perfil
 		exclude=['user']
 class fperfil_modificar(ModelForm):
-	email=forms.EmailField(max_length=100,required=True,label="Email")
+	contra=forms.CharField(max_length=40,required=True,help_text=False,label="Cambiar Password")
 	class Meta:
 		model=Perfil
 		exclude=['user']

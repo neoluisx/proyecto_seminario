@@ -8,7 +8,6 @@ class ftema(ModelForm):
 		model=Tema
 
 class fpregunta(ModelForm):
-	nombre=forms.CharField(required=True,label="Pregunta :")
 	class Meta:
 		model=Pregunta
 		exclude=['tema']
@@ -17,3 +16,8 @@ class frespuesta(ModelForm):
 	class Meta:
 		model=Respuesta
 		exclude=['pregunta']
+class frespuestaI(ModelForm):
+	class Meta:
+		model=Respuesta_Inco
+		exclude=['pregunta']
+

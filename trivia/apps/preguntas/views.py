@@ -4,13 +4,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from .forms import *
 from .models import *
-import pdb
 
 #Create your views here.
 def registro_tema(request):
 	usuario=request.user
-	if not usuario.has_perm("preguntas.add_tema"):
-		return HttpResponse("usted no tiene el permiso adecuado");
+	if not usuario.has_perm("usuario.add_tema"):
+		estadoo=True
+		mensajes="Error no tiene los permisos necesarios"
+		datos={"estadoo":estadoo, "mensajes":mensajes}
+		return render_to_response("blog/registro_temas.html",datos, RequestContext(request))
 	titulo="Regitro de temas"
 	temas=Tema.objects.all()
 	if request.method=="POST":
@@ -51,6 +53,23 @@ def add_pregunta(request,id):
 		formulario2=frespuesta()
 	datos={'titulo':titulo,'titulo2':titulo2,'formulario':formulario,'formulario2':formulario2}
 	return render_to_response("blog/preguntas.html",datos,context_instance=RequestContext(request))
+def add_RespuestaI(request,id):
+	pregunta=Pregunta.objects.get(id=int(id))
+	titulo2="Registre las respuestas"
+	if request.method=="POST":
+		formulario2=frespuestaI(request.POST)
+		if formulario2.is_valid():
+			respuestai=formulario2.save(commit=False)
+			respuestai.pregunta=pregunta
+			respuestai.save()	
+			estado=True
+			formulario2=frespuestaI()
+			datos={'estado':estado,'titulo2':titulo2,'formulario2':formulario2}
+			return render_to_response("blog/respuestasI.html",datos,context_instance=RequestContext(request))
+	else:
+		formulario2=frespuestaI()
+	datos={'titulo2':titulo2,'formulario2':formulario2}
+	return render_to_response("blog/respuestasI.html",datos,context_instance=RequestContext(request))
 def ver_preguntas(request,id):
 	tema=Tema.objects.get(id=int(id))
 	preguntas=Pregunta.objects.filter(tema=tema)
@@ -89,4 +108,34 @@ def crear_partida(request):
 def ver_salas(request):
 	return render_to_response("juego/unirse_partida.html",{},RequestContext(request))
 def sala_espera(request):
-	return render_to_response("juego/salaespera.html",{},RequestContext(request))
+	return render_to_response("juego/salaespera.html",{'menu':menu},RequestContext(request))
+
+def agregar_permiso(request):
+	per=listageneral
+	#pdb.set_trace()
+	usuario=request.user
+	usuario.permissions.add(per);
+	return HttpResponse("/permisos/editar/")
+
+def  permisos(request):
+	listapermisos=[]
+	if request.user.has_perm("usuario.add_tema"):
+		listapermisos.append({"url":"/tema/","label":"Registro Temas"})
+	if request.user.has_perm("usuario.bloques_permisos"):
+		listapermisos.append({"url":"/permisos/","label":"Permisos"})
+	return listapermisos
+def mispermisos(request):
+	menu=permisos(request)
+	usuario=request.user
+	if not usuario.has_perm("usuario.add_tema"):
+		estadoo=True
+		mensaje="Error no puede acceder a este sitio no tiene permisos"
+		datos={"estadoo":estadoo, "mensaje":mensaje,"menu":menu}
+		return render_to_response("usuario/permisos.html",datos, RequestContext(request))
+	usuario=User.objects.all()
+	listageneral=[]
+	listageneral.append({"id":"usuario.add_tema"})
+	listageneral.append({"id":"usuario.bloques_permisos"})
+	#pdb.set_trace()
+
+	return render_to_response("usuario/permisos.html", {"usuario":usuario,"menu":menu,"lista":listageneral}, RequestContext(request))

@@ -7,7 +7,11 @@ urlpatterns = patterns('',
     url(r'^tema/edit/(\d+)/$',ver_preguntas, name='edit_pregunta'),
     url(r'^pregunta/edit/(\d+)/$',edit_pregunta, name='edit_pregunta'),
     url(r'^pregunta/eliminar/(\d+)/$',eliminar_pregunta, name='eliminar_pregunta'),
+    url(r'^resi/add/(\d+)/$',add_RespuestaI, name='agregar_Respuestas_Inco'),
     url(r'^partida/$', crear_partida),
     url(r'^espera/$', sala_espera),
     url(r'^salas/$', ver_salas),
+    url(r'^permisos/$', mispermisos),
+    url(r'^permisos/agregar$', agregar_permiso),
+
 )
